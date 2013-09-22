@@ -2,6 +2,8 @@ package org.jbulletin.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jbulletin.beans.session.UserSession;
 import org.jbulletin.model.Post;
 import org.jbulletin.model.Section;
@@ -37,10 +39,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(ModelAndView mav, HttpServletRequest req) {
 	List<DetailedSection> sections = forumService.getDetailedSections();
 	mav.setViewName("index");
 	mav.addObject("sections", sections);
+	System.out.println("context path = " +  req.getContextPath());
+	System.out.println("servlet path = " + req.getServletPath());
 	return mav;
     }
 
