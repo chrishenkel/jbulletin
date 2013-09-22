@@ -8,7 +8,7 @@
 <title>Bootstrap 101 Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="<c:url value="resources/css/bootstrap.css"/>"
+<link href="<c:url value="/resources/css/bootstrap.css"/>"
 	rel="stylesheet" media="screen">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -18,7 +18,7 @@
     <![endif]-->
 
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="resources/css/jbulletin.css"/>" />
+	href="<c:url value="/resources/css/jbulletin.css"/>" />
 
 </head>
 <body>
@@ -40,10 +40,10 @@
 						<tr>
 
 							<td class="sub_section_image"><img
-								src="<c:url value="resources/img/netherchest.png"/>" /></td>
+								src="<c:url value="/resources/img/netherchest.png"/>" /></td>
 							<td class="sub_section_title">
 								<h4>
-									<a href="<c:url value="sub/${subSection.id}"/>"> <c:out
+									<a href="<c:url value="/sub/${subSection.id}"/>"> <c:out
 											value="${subSection.name}" /></a>
 								</h4>
 								<p>
@@ -57,7 +57,7 @@
 								</ul>
 							</td>
 							<td class="recent_poster_avatar"><img
-								src="<c:url value="resources/img/avatar.png"/>" /></td>
+								src="<c:url value="/resources/img/avatar.png"/>" /></td>
 							<td class="sub_section_recent_poster_info">
 								<ul>
 									<li><a class="small" href="">${subSection.mostRecentPost.poster.name}</a></li>
@@ -76,6 +76,6 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="code.jquery.com/jquery.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<c:url value="resources/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

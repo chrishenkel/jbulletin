@@ -10,7 +10,7 @@
 <title>Bootstrap 101 Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="<c:url value="resources/css/bootstrap.css"/>"
+<link href="<c:url value="/resources/css/bootstrap.css"/>"
 	rel="stylesheet" media="screen">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,7 +19,7 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="resources/css/jbulletin.css"/>" />
+	href="<c:url value="/resources/css/jbulletin.css"/>" />
 
 </head>
 <body>
@@ -27,7 +27,7 @@
 		<t:navbar />
 
 		<ul class="breadcrumb">
-			<li><a href="<c:url value=""/>">Forums</a> <span
+			<li><a href="<c:url value="/"/>">Forums</a> <span
 				class="divider">/</span></li>
 			<li class="active">${subSection.name}</li>
 		</ul>
@@ -40,7 +40,7 @@
 			<jsp:attribute name="baseUrl">/sub/${subSection.id}</jsp:attribute>
 		</t:pagination>
 
-		<a href="<c:url value="sub/${subSection.id}/topic/new"/>"
+		<a href="<c:url value="/sub/${subSection.id}/topic/new"/>"
 			style="float: right;" class="btn btn-success"><i
 			class="icon-white icon-flag"></i> New Topic</a>
 		<div class="panel panel-default">
@@ -54,11 +54,11 @@
 				<c:forEach items="${topics}" var="topic">
 					<tr>
 						<td class="sub_section_image"><img
-							src="<c:url value="resources/img/bucket.png"/>" /></td>
+							src="<c:url value="/resources/img/bucket.png"/>" /></td>
 						<td class="sub_section_title">
 							<h4>
 								<a
-									href="<c:url value="sub/${subSection.id}/topic/${topic.id}"/>">${topic.name}</a>
+									href="<c:url value="/sub/${subSection.id}/topic/${topic.id}"/>">${topic.name}</a>
 							</h4>
 							<p>Started by ${topic.poster.name}, <fmt:formatDate
 											type="both" dateStyle="short" timeStyle="short"
@@ -71,7 +71,7 @@
 							</ul>
 						</td>
 						<td class="recent_poster_avatar"><img
-							src="<c:url value="resources/img/avatar.png"/>" /></td>
+							src="<c:url value="/resources/img/avatar.png"/>" /></td>
 						<td class="sub_section_recent_poster_info">
 							<ul>
 								<li>${topic.mostRecentPost.poster.name}</li>
@@ -84,7 +84,7 @@
 				</c:forEach>
 			</table>
 		</div>
-		<a href="<c:url value="sub/${subSection.id}/topic/new"/>"
+		<a href="<c:url value="/sub/${subSection.id}/topic/new"/>"
 			style="float: right;" class="btn btn-success"><i
 			class="icon-white icon-flag"></i> New Topic</a>
 		<t:pagination>
