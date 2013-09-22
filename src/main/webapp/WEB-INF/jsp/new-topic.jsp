@@ -10,7 +10,7 @@
 <title>Bootstrap 101 Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="<c:url value="/resources/css/bootstrap.css"/>"
+<link href="<c:url value="resources/css/bootstrap.css"/>"
 	rel="stylesheet" media="screen">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,7 +19,7 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jbulletin.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="resources/css/jbulletin.css"/>"/>
 
 </head>
 <body>
@@ -30,9 +30,9 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<ul class="breadcrumb">
-							<li><a href="<c:url value="/"/>">Forums</a> <span
+							<li><a href="<c:url value=""/>">Forums</a> <span
 								class="divider">/</span></li>
-							<li><a href="<c:url value="/sub/${subSection.id}"/>">${subSection.name}</a>
+							<li><a href="<c:url value="sub/${subSection.id}"/>">${subSection.name}</a>
 								<span class="divider">/</span></li>
 							<li class="active">New Topic</li>
 						</ul>
@@ -63,7 +63,7 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="code.jquery.com/jquery.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="resources/js/bootstrap.min.js"/>"></script>
 	<ckeditor:replace replace="editor1" basePath="${ckeditorRoot}" />
 </body>
 </html>
