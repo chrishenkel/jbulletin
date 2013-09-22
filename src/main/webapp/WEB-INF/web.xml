@@ -37,6 +37,6 @@
 
 	<servlet-mapping>
 		<servlet-name>jbulletin</servlet-name>
-		<url-pattern>/jb/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
