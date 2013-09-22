@@ -88,6 +88,8 @@ public class TopicController {
 	    @RequestParam(value = "last", defaultValue = "false") boolean last,
 	    @PathVariable int subSectionId, @PathVariable int topicId,
 	    ModelAndView mav, HttpServletRequest request) {
+	System.out.println("context path = " +  request.getContextPath());
+	System.out.println("servlet path = " + request.getServletPath());
 
 	Topic topic = topicDao.getTopic(topicId);
 
