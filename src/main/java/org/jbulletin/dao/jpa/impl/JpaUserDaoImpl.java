@@ -1,5 +1,7 @@
 package org.jbulletin.dao.jpa.impl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.hibernate.Session;
@@ -27,7 +29,9 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
 	Query query = manager
 		.createQuery("select details from UserDetails details where details.name = :userName");
 	query.setParameter("userName", userName);
-	return ((UserDetails) query.getSingleResult());
+	List list = query.getResultList();
+	if(list.isEmpty()) return null;
+	return (UserDetails) list.get(0);
     }
 
     @Override
@@ -43,7 +47,9 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
 		.createQuery("select details from UserDetails details where details.name = :userName AND details.password = :password");
 	query.setParameter("userName", userName);
 	query.setParameter("password", password);
-	return ((UserDetails) query.getSingleResult());
+	List list = query.getResultList();
+	if(list.isEmpty()) return null;
+	return (UserDetails) list.get(0);
     }
 
 }

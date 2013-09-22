@@ -1,11 +1,14 @@
 package org.jbulletin.dao.jpa.impl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.jbulletin.dao.SubSectionDao;
 import org.jbulletin.model.Post;
 import org.jbulletin.model.SubSection;
+import org.jbulletin.model.UserDetails;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +53,9 @@ public class JpaSubSectionDaoImpl extends JpaDao implements
 	query.setParameter("id", subSection.getId());
 	query.setFirstResult(0);
 	query.setMaxResults(1);
-	return (Post) query.getSingleResult();
+	List list = query.getResultList();
+	if(list.isEmpty()) return null;
+	return (Post) list.get(0);
     }
 
 }

@@ -1,9 +1,12 @@
 package org.jbulletin.dao.jpa.impl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.jbulletin.dao.PostDao;
 import org.jbulletin.model.Post;
+import org.jbulletin.model.UserDetails;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +32,9 @@ public class JpaPostDao extends JpaDao implements PostDao {
     public Post mostRecentPostBySubSection(int subSectionId) {
 	Query query = manager.createQuery("FROM Post as p where p.topic.subSection.id = :id ORDER BY p.posted DESC");
 	query.setParameter("id", subSectionId);
-	return (Post) query.getSingleResult();
+	List list = query.getResultList();
+	if(list.isEmpty()) return null;
+	return (Post) list.get(0);
     }
 
 }
