@@ -1,5 +1,11 @@
 package org.jbulletin.service.impl;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.jbulletin.dao.UserDao;
 import org.jbulletin.dao.impl.HibernateUserDaoImpl;
 import org.jbulletin.form.AccountRegisterForm;

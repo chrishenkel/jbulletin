@@ -48,6 +48,7 @@ public class JpaSubSectionDaoImpl extends JpaDao implements
     }
 
     @Override
+    @Transactional
     public Post mostRecentPost(SubSection subSection) {	
 	Query query = manager.createQuery("FROM Post as p where p.topic.subSection.id= :id ORDER BY p.posted DESC");
 	query.setParameter("id", subSection.getId());

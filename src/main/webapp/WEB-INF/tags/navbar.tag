@@ -6,6 +6,7 @@
 <%@ attribute name="register"%>
 <%@ attribute name="contact"%>
 <%@ attribute name="about"%>
+<%@ attribute name="profile"%>
 
 <div class="navbar">
 	<div class="navbar-inner">
@@ -14,6 +15,7 @@
 			<c:choose>
 				<c:when test="${userSession.loggedIn}">
 				<li><a href="<c:url value="/account/logout"/>">Logout</a></li>
+				<li class="${profile}"><a href="<c:url value="/profile/${userSession.userDetails.id}"/>">Profile</a></li>
 				</c:when>
 				<c:otherwise>
 					<li class="${login}"><a href="<c:url value="/account/login"/>">Login</a></li>				

@@ -10,4 +10,6 @@ public interface UserDao {
     public void saveUser(UserDetails user);
 
     public UserDetails findUser(String userName, String password);
+
+    public UserDetails getUser(int id);
 }

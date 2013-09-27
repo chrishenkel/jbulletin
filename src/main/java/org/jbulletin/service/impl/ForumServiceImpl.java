@@ -69,6 +69,8 @@ public class ForumServiceImpl implements ForumService {
     public void savePost(int topicId, Post post) {
 	Topic topic = topicDao.getTopic(topicId);
 	topic.addPost(post);
+	UserDetails poster = post.getPoster();
+	poster.setPostCount(poster.getPostCount() + 1);
 	topicDao.saveTopic(topic);
     }
 
@@ -119,14 +121,20 @@ public class ForumServiceImpl implements ForumService {
 
     @Override
     public void saveTopic(Topic topic) {
+	UserDetails poster = topic.getPoster();
+	poster.setPostCount(poster.getPostCount() + 1);
 	topicDao.saveTopic(topic);
     }
 
     @Override
-    public void incrementViewCount(Topic topic) {
+    public void incrementViewCount(Topic topic, UserDetails userDetails) {
+	topic = topicDao.getTopic(topic.getId());
+	if(topic == null)
+	{
+	    topicDao.saveTopic(topic);
+	}
 	topic.setViewCount(topic.getViewCount() + 1);
 	System.out.println("count = " + topic.getViewCount());
-	topicDao.saveTopic(topic);
     }
 
     @Override
@@ -137,6 +145,32 @@ public class ForumServiceImpl implements ForumService {
     @Override
     public SubSection getSubSection(int subSectionId) {
 	return subSectionDao.getSubSection(subSectionId);
+    }
+
+    @Override
+    public void saveSubSection(SubSection subSection) {
+	subSectionDao.saveSection(subSection);
+    }
+
+    @Override
+    public void incrementPostCountForUser(UserDetails userDetails) {
+	userDetails = userDao.getUser(userDetails.getId());	
+	if(userDetails == null)
+	{
+	    userDao.saveUser(userDetails);
+	}
+	userDetails.setPostCount(userDetails.getPostCount() + 1);
+    }
+
+    @Override
+    public void saveUserImage(UserDetails userDetails, byte[] byteArray) {
+	userDetails = userDao.getUser(userDetails.getId());	
+	userDetails.setAvatar(byteArray);
+    }
+
+    @Override
+    public UserDetails getUserById(int userId) {
+	return userDao.getUser(userId);
     }
 
 }

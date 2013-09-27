@@ -68,9 +68,10 @@
 								<div class="span2">
 									<ul class="basic_info">
 										<p class="member_title">${post.poster.name}</p>
-										<li><img alt="140x140"
-											src="http://lorempixel.com/140/140/" /></li>
-										<li>600 posts</li>
+										<li><img
+											src="<c:url value="/profile/${post.poster.id}/avatar"/>" width="140" height="140" />
+										</li>
+										<li>${post.poster.postCount}posts</li>
 									</ul>
 								</div>
 								<div class="span10 post_content">

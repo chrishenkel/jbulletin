@@ -12,6 +12,7 @@ import org.jbulletin.form.TopicForm;
 import org.jbulletin.model.Post;
 import org.jbulletin.model.SubSection;
 import org.jbulletin.model.Topic;
+import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,7 +94,12 @@ public class TopicController {
 
 	Topic topic = topicDao.getTopic(topicId);
 
-	forumService.incrementViewCount(topic);
+	UserDetails userDetails = userSession.getUserDetails();
+	
+	if(userDetails != null)
+	{
+	    forumService.incrementViewCount(topic, userDetails);
+	}
 	
 	int pageCount = (topic.getPostCount() / postsPerPage)
 		+ (((topic.getPostCount() % postsPerPage) > 0) ? 1 : 0);
@@ -140,6 +146,7 @@ public class TopicController {
 	Post post = new Post();
 	post.setContent(content);
 	post.setPoster(userSession.getUserDetails());
+	forumService.incrementPostCountForUser(userSession.getUserDetails());
 	forumService.savePost(topicId, post);
 	return "redirect:/sub/" + subSectionId + "/topic/" + topicId
 		+ "?last=true";
@@ -216,6 +223,8 @@ public class TopicController {
 	topic.setName(topicForm.getTopicName());
 	topic.setPoster(userSession.getUserDetails());
 	topic.addPost(post);
+
+	forumService.incrementPostCountForUser(userSession.getUserDetails());
 
 	SubSection subSection = subSectionDao.getSubSection(subSectionId);
 

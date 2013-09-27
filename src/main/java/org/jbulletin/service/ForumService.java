@@ -35,9 +35,17 @@ public interface ForumService {
 
     public void saveTopic(Topic topic);
 
-    public void incrementViewCount(Topic topic);
+    public void incrementViewCount(Topic topic, UserDetails userDetails);
 
     public void saveUser(UserDetails userDetails1);
 
     public SubSection getSubSection(int subSectionId);
+
+    public void saveSubSection(SubSection subSection);
+
+    public void incrementPostCountForUser(UserDetails userDetails);
+
+    public void saveUserImage(UserDetails userDetails, byte[] byteArray);
+
+    public UserDetails getUserById(int userId);
 }

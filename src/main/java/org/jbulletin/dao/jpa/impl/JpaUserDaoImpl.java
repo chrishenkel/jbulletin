@@ -37,7 +37,14 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
     @Override
     @Transactional
     public void saveUser(UserDetails user) {
-	manager.persist(user);
+	if(manager.find(UserDetails.class, user.getId()) == null)
+	{
+	    manager.persist(user);    
+	}
+	else
+	{
+	    manager.merge(user);
+	}
     }
 
     @Override
@@ -50,6 +57,12 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
 	List list = query.getResultList();
 	if(list.isEmpty()) return null;
 	return (UserDetails) list.get(0);
+    }
+
+    @Override
+    public UserDetails getUser(int id) {
+	// TODO Auto-generated method stub
+	return manager.find(UserDetails.class, id);
     }
 
 }

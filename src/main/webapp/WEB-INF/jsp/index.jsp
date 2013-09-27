@@ -57,7 +57,7 @@
 								</ul>
 							</td>
 							<td class="recent_poster_avatar"><img
-								src="<c:url value="/resources/img/avatar.png"/>" /></td>
+								src="<c:url value="/profile/${subSection.mostRecentPost.poster.id}/avatar"/>" /></td>
 							<td class="sub_section_recent_poster_info">
 								<ul>
 									<li><a class="small" href="">${subSection.mostRecentPost.poster.name}</a></li>

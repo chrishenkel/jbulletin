@@ -46,4 +46,10 @@ public class HibernateUserDaoImpl extends HibernateDao implements UserDao {
 	return ((UserDetails) query.uniqueResult());
     }
 
+    @Override
+    public UserDetails getUser(int id) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
 }

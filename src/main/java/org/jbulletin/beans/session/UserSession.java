@@ -1,13 +1,15 @@
 package org.jbulletin.beans.session;
 
+import java.io.Serializable;
+
 import org.jbulletin.model.UserDetails;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserSession {
+public class UserSession implements Serializable {
     private boolean loggedIn;
-
+    
     private UserDetails userDetails;
 
     public boolean isLoggedIn() {

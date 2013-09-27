@@ -24,7 +24,7 @@ public class JpaTopicDaoImpl extends JpaDao implements TopicDao {
     @Override
     @Transactional
     public void saveTopic(Topic topic) {
-	manager.merge(topic);
+	manager.persist(topic);
     }
 
     @Override
