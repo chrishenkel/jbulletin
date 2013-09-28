@@ -4,7 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.jbulletin.dao.PostDao;
 import org.jbulletin.model.Post;
-import org.jbulletin.model.Topic;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,21 +1,17 @@
 package org.test.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.jbulletin.model.Section;
-import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.SectionService;
-import org.jbulletin.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-context.xml")

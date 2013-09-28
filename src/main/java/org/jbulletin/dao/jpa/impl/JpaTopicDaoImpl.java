@@ -27,6 +27,7 @@ public class JpaTopicDaoImpl extends JpaDao implements TopicDao {
 	manager.persist(topic);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public Collection<Topic> getTopicsFromSubSection(int subSectionId,
@@ -38,6 +39,7 @@ public class JpaTopicDaoImpl extends JpaDao implements TopicDao {
 	return query.getResultList();
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public Collection<Post> getPostsFromTopic(int topicId, int start, int length) {

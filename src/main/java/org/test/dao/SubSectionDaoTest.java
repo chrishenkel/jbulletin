@@ -5,12 +5,8 @@ import static org.junit.Assert.assertEquals;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.jbulletin.model.Section;
 import org.jbulletin.model.SubSection;
 import org.jbulletin.service.SubSectionService;
-import org.jbulletin.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

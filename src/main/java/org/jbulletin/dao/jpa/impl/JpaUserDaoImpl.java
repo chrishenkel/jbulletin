@@ -4,11 +4,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.jbulletin.dao.UserDao;
 import org.jbulletin.model.UserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -29,7 +26,8 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
 	Query query = manager
 		.createQuery("select details from UserDetails details where details.name = :userName");
 	query.setParameter("userName", userName);
-	List list = query.getResultList();
+	@SuppressWarnings("unchecked")
+	List<UserDetails> list = query.getResultList();
 	if(list.isEmpty()) return null;
 	return (UserDetails) list.get(0);
     }
@@ -54,7 +52,8 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
 		.createQuery("select details from UserDetails details where details.name = :userName AND details.password = :password");
 	query.setParameter("userName", userName);
 	query.setParameter("password", password);
-	List list = query.getResultList();
+	@SuppressWarnings("unchecked")
+	List<UserDetails> list = query.getResultList();
 	if(list.isEmpty()) return null;
 	return (UserDetails) list.get(0);
     }

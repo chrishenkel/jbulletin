@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.jbulletin.model.Post;
 import org.jbulletin.model.Topic;
-import org.springframework.stereotype.Repository;
 
 public interface TopicDao {
     public Topic getTopic(int topicId);

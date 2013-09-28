@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.jbulletin.dao.TopicDao;
 import org.jbulletin.model.Post;
 import org.jbulletin.model.Topic;
@@ -27,6 +26,7 @@ public class HibernateTopicDaoImpl extends HibernateDao implements TopicDao {
 	getFactory().getCurrentSession().saveOrUpdate(topic);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public Collection<Topic> getTopicsFromSubSection(int subSectionId,
@@ -40,6 +40,7 @@ public class HibernateTopicDaoImpl extends HibernateDao implements TopicDao {
 	return query.list();
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public Collection<Post> getPostsFromTopic(int topicId, int start, int length) {

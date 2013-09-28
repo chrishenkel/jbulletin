@@ -4,14 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.jbulletin.beans.session.UserSession;
-import org.jbulletin.dao.UserDao;
 import org.jbulletin.form.AccountLoginForm;
 import org.jbulletin.form.AccountRegisterForm;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
 import org.jbulletin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

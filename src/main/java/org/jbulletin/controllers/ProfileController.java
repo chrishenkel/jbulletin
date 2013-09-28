@@ -1,16 +1,9 @@
 package org.jbulletin.controllers;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.jbulletin.beans.session.UserSession;
-import org.jbulletin.dao.UserDao;
-import org.jbulletin.form.AvatarUploadForm;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
 import org.springframework.beans.factory.annotation.Autowired;

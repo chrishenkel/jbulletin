@@ -10,7 +10,6 @@ import org.jbulletin.model.Topic;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.model.DetailedSection;
 import org.jbulletin.service.model.DetailedSubSection;
-import org.springframework.stereotype.Service;
 
 public interface ForumService {
 

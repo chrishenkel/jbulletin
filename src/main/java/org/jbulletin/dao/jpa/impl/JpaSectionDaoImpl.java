@@ -29,6 +29,7 @@ public class JpaSectionDaoImpl extends JpaDao implements SectionDao {
 	return (Section) manager.find(Section.class, id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public List<Section> getSections() {

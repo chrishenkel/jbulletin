@@ -87,7 +87,7 @@ public class ForumServiceImpl implements ForumService {
     @Override
     public DetailedSection getDetailedSection(Section section) {
 	Collection<SubSection> subSections = section.getSubSections();
-	Collection<DetailedSubSection> detailedSubSections = new ArrayList();
+	Collection<DetailedSubSection> detailedSubSections = new ArrayList<DetailedSubSection>();
 	for (SubSection subSection : subSections) {
 	    detailedSubSections.add(getDetailedSubSection(subSection));
 	}
@@ -97,7 +97,7 @@ public class ForumServiceImpl implements ForumService {
     @Override
     public List<DetailedSection> getDetailedSections() {
 	List<Section> sections = sectionDao.getSections();
-	List<DetailedSection> detailedSections = new ArrayList();
+	List<DetailedSection> detailedSections = new ArrayList<DetailedSection>();
 	for (Section section : sections) {
 	    detailedSections.add(getDetailedSection(section));
 	}

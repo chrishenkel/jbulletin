@@ -29,9 +29,10 @@ public class HibernateSectionDaoImpl extends HibernateDao implements SectionDao 
 		return (Section) session.get(Section.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Section> getSections() {
-		return getFactory().getCurrentSession().createQuery("from Section").list();
+	    return getFactory().getCurrentSession().createQuery("from Section").list();
 	}
 }

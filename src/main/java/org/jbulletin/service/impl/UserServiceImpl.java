@@ -1,13 +1,6 @@
 package org.jbulletin.service.impl;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import org.jbulletin.dao.UserDao;
-import org.jbulletin.dao.impl.HibernateUserDaoImpl;
 import org.jbulletin.form.AccountRegisterForm;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.UserService;
@@ -18,23 +11,18 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.jbulletin.service.UserService2#getUserCount()
-     */
-    @Override
-    public int getUserCount() {
-	return userDao.getUserCount();
-    }
-
+    
     public UserDao getUserDao() {
 	return userDao;
     }
 
     public void setUserDao(UserDao userDao) {
 	this.userDao = userDao;
+    }
+
+    @Override
+    public int getUserCount() {
+	return userDao.getUserCount();
     }
 
     @Override

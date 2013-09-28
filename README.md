@@ -1,6 +1,6 @@
-# Spring MVC and Hibernate template application 
+# JBulletin - A forum built in Java using Spring and JPA
 
-This is a template for a web application that uses Spring MVC and Hibernate. The sample code is a simple CRUD page that manipulates records for a single model object.
+This is a medium sized project to create a Java forum using Spring and JPA. 
 
 ## Running the application locally
 

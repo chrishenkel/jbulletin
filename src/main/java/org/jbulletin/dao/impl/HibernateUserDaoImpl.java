@@ -2,10 +2,8 @@ package org.jbulletin.dao.impl;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.jbulletin.dao.UserDao;
 import org.jbulletin.model.UserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

@@ -8,6 +8,6 @@ public interface PostDao {
 
     public Post getPost(int id);
 
-    Post mostRecentPostBySubSection(int subSectionId);
+    public Post mostRecentPostBySubSection(int subSectionId);
 
 }
