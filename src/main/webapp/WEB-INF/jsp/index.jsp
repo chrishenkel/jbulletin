@@ -23,7 +23,6 @@
 </head>
 <body>
 	<div class="container">
-	test
 		<t:navbar />
 		
 		<div class="panel panel-default">
