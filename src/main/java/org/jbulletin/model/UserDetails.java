@@ -2,6 +2,7 @@ package org.jbulletin.model;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,9 @@ import javax.persistence.Lob;
 import org.apache.commons.io.IOUtils;
 
 @Entity
-public class UserDetails {
+public class UserDetails implements Serializable {
+
+    private static final long serialVersionUID = -6994664867741148954L;
 
     @Id
     @GeneratedValue

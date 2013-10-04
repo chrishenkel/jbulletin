@@ -6,7 +6,7 @@ import org.jbulletin.model.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserSession implements Serializable {
+public class UserSession {
     private static final long serialVersionUID = -2432342912796200644L;
 
     private boolean loggedIn;

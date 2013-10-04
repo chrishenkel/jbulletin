@@ -74,8 +74,7 @@ public class ProfileController {
 
     @ResponseBody
     @RequestMapping(value = "/profile/{userId}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] avatarUpload(@PathVariable int userId) throws IOException {
-	System.out.println("executing");
+    public byte[] avatarUploadForm(@PathVariable int userId) throws IOException {
 	UserDetails userDetails = userService.getUserById(userId);
 	return userDetails.getCurrentAvatar();
     }
