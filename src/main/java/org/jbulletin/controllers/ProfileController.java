@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.jbulletin.beans.session.UserSession;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
+import org.jbulletin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,20 @@ public class ProfileController {
     @Autowired
     private ForumService forumService;
 
+    @Autowired
+    private UserService userService;
+
     @ModelAttribute("userSession")
     public UserSession getUserSession() {
 	return userSession;
+    }
+
+    public UserService getUserService() {
+	return userService;
+    }
+
+    public void setUserService(UserService userService) {
+	this.userService = userService;
     }
 
     public void setUserSession(UserSession userSession) {
@@ -59,13 +71,12 @@ public class ProfileController {
 	mav.setViewName("user-profile");
 	return mav;
     }
-    
+
     @ResponseBody
     @RequestMapping(value = "/profile/{userId}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] avatarUpload(@PathVariable int userId)
-	    throws IOException {
+    public byte[] avatarUpload(@PathVariable int userId) throws IOException {
 	System.out.println("executing");
-	UserDetails userDetails = forumService.getUserById(userId);
+	UserDetails userDetails = userService.getUserById(userId);
 	return userDetails.getCurrentAvatar();
     }
 
@@ -84,8 +95,8 @@ public class ProfileController {
 
 	UserDetails userDetails = userSession.getUserDetails();
 	userDetails.setAvatar(IOUtils.toByteArray(file.getInputStream()));
-	forumService.saveUser(userDetails);
-
+	userService.saveUser(userDetails);
+	
 	return "redirect:/profile/" + userId;
     }
 }

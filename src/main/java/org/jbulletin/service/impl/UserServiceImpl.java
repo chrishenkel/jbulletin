@@ -6,8 +6,10 @@ import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
@@ -23,6 +25,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getUserCount() {
 	return userDao.getUserCount();
+    }
+
+    @Override
+    public UserDetails getUserByName(String userName) {
+	return userDao.getUserByName(userName);
+    }
+
+    @Override
+    public void saveUser(UserDetails userDetails1) {
+	userDao.saveUser(userDetails1);
     }
 
     @Override
@@ -47,4 +59,15 @@ public class UserServiceImpl implements UserService {
 	return userDao.findUser(userName, password);
     }
 
+    @Override
+    public void incrementPostCountForUser(UserDetails userDetails) {
+	userDetails = userDao.getUser(userDetails.getId());	
+	userDetails.setPostCount(userDetails.getPostCount() + 1);
+	userDao.saveUser(userDetails);
+    }
+
+    @Override
+    public UserDetails getUserById(int userId) {
+	return userDao.getUser(userId);
+    }
 }

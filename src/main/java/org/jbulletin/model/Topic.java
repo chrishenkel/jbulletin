@@ -2,6 +2,7 @@ package org.jbulletin.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,8 +26,10 @@ public class Topic {
     @ManyToOne
     private SubSection subSection;
 
-    @OneToOne
+    @OneToOne 
     private Post mostRecentPost;
+    
+    private Date updated = new Date(); // Last updated
 
     private int postCount;
 
@@ -88,6 +91,7 @@ public class Topic {
 	post.setSelector(postCount++);
 	post.setTopic(this);
 	mostRecentPost = post;
+	updated = new Date();
     }
 
     public int getViewCount() {
@@ -106,4 +110,13 @@ public class Topic {
 	this.mostRecentPost = mostRecentPost;
     }
 
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    
 }

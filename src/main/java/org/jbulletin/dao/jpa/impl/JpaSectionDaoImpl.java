@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import static org.jbulletin.dao.jpa.impl.JpaUtil.*;
 
 @Primary
 @Repository
@@ -19,19 +20,16 @@ public class JpaSectionDaoImpl extends JpaDao implements SectionDao {
     }
 
     @Override
-    @Transactional
     public void saveSection(Section section) {
-	manager.persist(section);
+	saveOrUpdate(manager, section);
     }
 
-    @Transactional
     public Section getSection(int id) {
 	return (Section) manager.find(Section.class, id);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
     public List<Section> getSections() {
 	return manager.createQuery("from Section")
 		.getResultList();

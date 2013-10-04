@@ -13,7 +13,7 @@ import org.jbulletin.service.model.DetailedSubSection;
 
 public interface ForumService {
 
-    Collection<Topic> getTopicsFromSubSection(int subSectionId, int pageIndex,
+    public Collection<Topic> getTopicsFromSubSection(int subSectionId, int pageIndex,
 	    int topicsPerPage);
 
     public int topicsPerSubSection(int subSectionId);
@@ -30,21 +30,20 @@ public interface ForumService {
 
     public Section getSection(int id);
 
-    public UserDetails getUserByName(String userName);
-
     public void saveTopic(Topic topic);
 
-    public void incrementViewCount(Topic topic, UserDetails userDetails);
-
-    public void saveUser(UserDetails userDetails1);
+    public void incrementViewCount(Topic topic);
 
     public SubSection getSubSection(int subSectionId);
 
     public void saveSubSection(SubSection subSection);
 
-    public void incrementPostCountForUser(UserDetails userDetails);
+    public void savePost(Post post2);
 
-    public void saveUserImage(UserDetails userDetails, byte[] byteArray);
+    public Topic getTopic(int topicId);
 
-    public UserDetails getUserById(int userId);
+    public Collection<Post> getPostsFromTopic(int topicId, int index,
+	    int windowLength);
 }
+
+

@@ -1,5 +1,7 @@
 package org.jbulletin.dao.jpa.impl;
 
+import static org.jbulletin.dao.jpa.impl.JpaUtil.saveOrUpdate;
+
 import java.util.List;
 
 import javax.persistence.Query;
@@ -9,7 +11,6 @@ import org.jbulletin.model.Post;
 import org.jbulletin.model.SubSection;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Primary
 @Repository
@@ -17,13 +18,11 @@ public class JpaSubSectionDaoImpl extends JpaDao implements
 	SubSectionDao {
 
     @Override
-    @Transactional
     public SubSection getSubSection(int id) {
 	return manager.find(SubSection.class, id);
     }
 
     @Override
-    @Transactional
     public int topicsPerSubSection(int subSectionId) {
 	Query query = manager.createQuery("select count(topic) from Topic topic where topic.subSection.id = :id");
 	query .setParameter("id", subSectionId);
@@ -31,7 +30,6 @@ public class JpaSubSectionDaoImpl extends JpaDao implements
     }
     
     @Override
-    @Transactional
     public int repliesPerSubSection(int subSectionId) {
 	Query query = manager
 		.createQuery("select count(post) from Post post where post.topic.subSection.id = :id");
@@ -40,13 +38,11 @@ public class JpaSubSectionDaoImpl extends JpaDao implements
     }    
 
     @Override
-    @Transactional
     public void saveSection(SubSection subSection) {
-	manager.persist(subSection);
+	saveOrUpdate(manager, subSection);
     }
 
     @Override
-    @Transactional
     public Post mostRecentPost(SubSection subSection) {	
 	Query query = manager.createQuery("FROM Post as p where p.topic.subSection.id= :id ORDER BY p.posted DESC");
 	query.setParameter("id", subSection.getId());

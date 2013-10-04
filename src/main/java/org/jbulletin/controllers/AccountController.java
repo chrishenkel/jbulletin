@@ -78,7 +78,7 @@ public class AccountController {
 	
 	UserDetails userDetails = null;
 
-	if ((userDetails = forumService.getUserByName(registerForm.getUserName())) != null) {
+	if ((userDetails = userService.getUserByName(registerForm.getUserName())) != null) {
 	    result.addError(new FieldError("registerForm", "userName",
 		    "A user already exists with that name."));
 	    mav.setViewName("register");

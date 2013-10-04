@@ -7,13 +7,13 @@ import javax.validation.Valid;
 
 import org.jbulletin.beans.session.UserSession;
 import org.jbulletin.dao.SubSectionDao;
-import org.jbulletin.dao.TopicDao;
 import org.jbulletin.form.TopicForm;
 import org.jbulletin.model.Post;
 import org.jbulletin.model.SubSection;
 import org.jbulletin.model.Topic;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
+import org.jbulletin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,18 +28,26 @@ import org.springframework.web.servlet.ModelAndView;
 public class TopicController {
 
     @Autowired
-    private TopicDao topicDao;
-
-    @Autowired
     private SubSectionDao subSectionDao;
 
     @Autowired
     private ForumService forumService;
 
+    @Autowired
+    private UserService userService;
+
     private int postsPerPage = 10;
 
     @Autowired
     private UserSession userSession;
+
+    public UserService getUserService() {
+	return userService;
+    }
+
+    public void setUserService(UserService userService) {
+	this.userService = userService;
+    }
 
     @ModelAttribute("userSession")
     public UserSession getUserSession() {
@@ -48,14 +56,6 @@ public class TopicController {
 
     public void setUserSession(UserSession userSession) {
 	this.userSession = userSession;
-    }
-
-    public TopicDao getTopicDao() {
-	return topicDao;
-    }
-
-    public void setTopicDao(TopicDao topicDao) {
-	this.topicDao = topicDao;
     }
 
     public SubSectionDao getSubSectionDao() {
@@ -88,18 +88,13 @@ public class TopicController {
 	    @RequestParam(value = "last", defaultValue = "false") boolean last,
 	    @PathVariable int subSectionId, @PathVariable int topicId,
 	    ModelAndView mav, HttpServletRequest request) {
-	System.out.println("context path = " +  request.getContextPath());
+	System.out.println("context path = " + request.getContextPath());
 	System.out.println("servlet path = " + request.getServletPath());
 
-	Topic topic = topicDao.getTopic(topicId);
+	Topic topic = forumService.getTopic(topicId);
+	
+	forumService.incrementViewCount(topic);
 
-	UserDetails userDetails = userSession.getUserDetails();
-	
-	if(userDetails != null)
-	{
-	    forumService.incrementViewCount(topic, userDetails);
-	}
-	
 	int pageCount = (topic.getPostCount() / postsPerPage)
 		+ (((topic.getPostCount() % postsPerPage) > 0) ? 1 : 0);
 
@@ -112,7 +107,7 @@ public class TopicController {
 	int windowLength = Math.min(postsPerPage, topic.getPostCount()
 		- (page * postsPerPage));
 
-	Collection<Post> posts = topicDao.getPostsFromTopic(topicId, index,
+	Collection<Post> posts = forumService.getPostsFromTopic(topicId, index,
 		windowLength);
 
 	int previousPage = Math.max(0, page - 1);
@@ -132,7 +127,7 @@ public class TopicController {
     }
 
     @RequestMapping(value = "/sub/{subSectionId}/topic/{topicId}/post", method = RequestMethod.POST)
-    public String postTopic(
+    public String savePost(
 	    @RequestParam(value = "index", defaultValue = "0") int pageIndex,
 	    @RequestParam(value = "forum-editor", defaultValue = "0") String content,
 	    @PathVariable int subSectionId, @PathVariable int topicId,
@@ -141,18 +136,23 @@ public class TopicController {
 	if (!userSession.isLoggedIn()) {
 	    return "redirect:/account/login";
 	}
-
+	
+	Topic topic = forumService.getTopic(pageIndex);
+	
 	Post post = new Post();
 	post.setContent(content);
 	post.setPoster(userSession.getUserDetails());
-	forumService.incrementPostCountForUser(userSession.getUserDetails());
+	
 	forumService.savePost(topicId, post);
+	
+	userService.incrementPostCountForUser(userSession.getUserDetails());
+
 	return "redirect:/sub/" + subSectionId + "/topic/" + topicId
 		+ "?last=true";
     }
 
     @RequestMapping("/sub/{subSectionId}/topic/{topicId}/post/new")
-    public ModelAndView newPost(ModelAndView mav,
+    public ModelAndView newPostForm(ModelAndView mav,
 	    @PathVariable int subSectionId, @PathVariable int topicId,
 	    HttpServletRequest request) {
 
@@ -161,7 +161,7 @@ public class TopicController {
 	    return mav;
 	}
 
-	Topic topic = topicDao.getTopic(topicId);
+	Topic topic = forumService.getTopic(topicId);
 
 	mav.setViewName("new-post");
 	mav.addObject("topic", topic);
@@ -171,7 +171,7 @@ public class TopicController {
     }
 
     @RequestMapping("/sub/{subSectionId}/topic/new")
-    public ModelAndView newTopic(ModelAndView mav,
+    public ModelAndView newTopicForm(ModelAndView mav,
 	    @PathVariable int subSectionId, HttpServletRequest request) {
 
 	if (!userSession.isLoggedIn()) {
@@ -192,7 +192,7 @@ public class TopicController {
     }
 
     @RequestMapping(value = "/sub/{subSectionId}/topic", method = RequestMethod.POST)
-    public ModelAndView newTopicPost(ModelAndView mav,
+    public ModelAndView saveTopic(ModelAndView mav,
 	    @PathVariable int subSectionId, HttpServletRequest request,
 	    @ModelAttribute("topicForm") @Valid TopicForm topicForm,
 	    BindingResult result) {
@@ -214,8 +214,6 @@ public class TopicController {
 	Topic topic = new Topic();
 
 	Post post = new Post();
-	System.out.println("user sessesion = " + userSession.getUserDetails()
-		+ " when posting");
 	post.setPoster(userSession.getUserDetails());
 	post.setContent(topicForm.getTopicContent());
 
@@ -223,7 +221,7 @@ public class TopicController {
 	topic.setPoster(userSession.getUserDetails());
 	topic.addPost(post);
 
-	forumService.incrementPostCountForUser(userSession.getUserDetails());
+	userService.incrementPostCountForUser(userSession.getUserDetails());
 
 	SubSection subSection = subSectionDao.getSubSection(subSectionId);
 

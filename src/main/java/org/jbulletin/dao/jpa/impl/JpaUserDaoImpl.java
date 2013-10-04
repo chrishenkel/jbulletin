@@ -1,5 +1,7 @@
 package org.jbulletin.dao.jpa.impl;
 
+import static org.jbulletin.dao.jpa.impl.JpaUtil.saveOrUpdate;
+
 import java.util.List;
 
 import javax.persistence.Query;
@@ -21,7 +23,6 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
     }
 
     @Override
-    @Transactional
     public UserDetails getUserByName(String userName) {
 	Query query = manager
 		.createQuery("select details from UserDetails details where details.name = :userName");
@@ -33,20 +34,11 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
     }
 
     @Override
-    @Transactional
     public void saveUser(UserDetails user) {
-	if(manager.find(UserDetails.class, user.getId()) == null)
-	{
-	    manager.persist(user);    
-	}
-	else
-	{
-	    manager.merge(user);
-	}
+	saveOrUpdate(manager, user);
     }
 
     @Override
-    @Transactional
     public UserDetails findUser(String userName, String password) {
 	Query query = manager
 		.createQuery("select details from UserDetails details where details.name = :userName AND details.password = :password");
@@ -60,7 +52,6 @@ public class JpaUserDaoImpl extends JpaDao implements UserDao {
 
     @Override
     public UserDetails getUser(int id) {
-	// TODO Auto-generated method stub
 	return manager.find(UserDetails.class, id);
     }
 

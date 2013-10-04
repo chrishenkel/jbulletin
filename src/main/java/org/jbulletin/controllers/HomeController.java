@@ -11,6 +11,7 @@ import org.jbulletin.model.SubSection;
 import org.jbulletin.model.Topic;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
+import org.jbulletin.service.UserService;
 import org.jbulletin.service.model.DetailedSection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     @Autowired
     private ForumService forumService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserSession userSession;
@@ -70,12 +74,6 @@ public class HomeController {
 
 	section.getSubSections().add(subSection);
 
-	forumService.saveSection(section);
-	forumService.saveSection(section2);
-
-	forumService.saveUser(userDetails1);
-	forumService.saveUser(userDetails2);
-
 	for (int i = 0; i < 40; i++) {
 	    Topic topic = new Topic();
 	    topic.setName("Test Topic " + i);
@@ -87,8 +85,6 @@ public class HomeController {
 	    }
 	    
 	    subSection.addTopic(topic);
-
-	    forumService.saveTopic(topic);
 
 	    for (int j = 0; j < 30; j++) {
 		Post post = new Post();
@@ -103,11 +99,16 @@ public class HomeController {
 			post.setPoster(userDetails2);
 		    }
 		}
-
-		forumService.savePost(topic.getId(), post);
+		
+		topic.addPost(post);
 	    }
 	}
 
+	userService.saveUser(userDetails1);
+	userService.saveUser(userDetails2);
+
+	forumService.saveSection(section);
+	forumService.saveSection(section2);
 	
 	return "redirect:/index";
     }
