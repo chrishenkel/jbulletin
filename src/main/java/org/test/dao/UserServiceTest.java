@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import javax.persistence.PersistenceException;
 
-import org.jbulletin.model.Post;
-import org.jbulletin.model.Topic;
 import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.UserService;
 import org.junit.Before;

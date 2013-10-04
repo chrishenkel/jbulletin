@@ -2,7 +2,6 @@ package org.jbulletin.model;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,7 +74,7 @@ public class UserDetails {
 
 	if (defaultAvatar == null) {
 	    InputStream in = this.getClass().getClassLoader()
-                    .getResourceAsStream("/defaultAvatar.png");
+                    .getResourceAsStream("/default-avatar.png");
 	    
 	    defaultAvatar = IOUtils.toByteArray(in);
 	}

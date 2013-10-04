@@ -22,12 +22,12 @@
 
 </head>
 <body>
-	<div class="container" >
-		<t:navbar login="active"/>
+	<div class="container">
+		<t:navbar login="active" />
 		<form:form commandName="loginForm" action="${postUrl}" method="post">
 			<p>
 				<form:label path="userName">User Name</form:label>
-					<form:input path="userName" />
+				<form:input path="userName" />
 				<form:errors path="userName" />
 			</p>
 			<p>

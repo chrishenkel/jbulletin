@@ -16,7 +16,6 @@ import org.jbulletin.model.Post;
 import org.jbulletin.model.Section;
 import org.jbulletin.model.SubSection;
 import org.jbulletin.model.Topic;
-import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
 import org.jbulletin.service.model.DetailedSection;
 import org.jbulletin.service.model.DetailedSubSection;

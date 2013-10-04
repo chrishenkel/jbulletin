@@ -11,7 +11,6 @@ import org.jbulletin.form.TopicForm;
 import org.jbulletin.model.Post;
 import org.jbulletin.model.SubSection;
 import org.jbulletin.model.Topic;
-import org.jbulletin.model.UserDetails;
 import org.jbulletin.service.ForumService;
 import org.jbulletin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,8 +135,6 @@ public class TopicController {
 	if (!userSession.isLoggedIn()) {
 	    return "redirect:/account/login";
 	}
-	
-	Topic topic = forumService.getTopic(pageIndex);
 	
 	Post post = new Post();
 	post.setContent(content);
