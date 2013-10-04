@@ -22,8 +22,6 @@
 					<li class="${register}"><a href="<c:url value="/account/new"/>">Register</a></li>
 				</c:otherwise>
 			</c:choose>
-			<li class="${contact}}/>"><a href="#">Contact</a></li>
-			<li class="${about}}/>"><a href="#">About</a></li>
 		</ul>
 	</div>
 </div>

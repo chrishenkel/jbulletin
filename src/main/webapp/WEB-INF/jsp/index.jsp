@@ -24,7 +24,7 @@
 <body>
 	<div class="container">
 		<t:navbar />
-
+		
 		<div class="panel panel-default">
 			<!-- Default panel contents -->
 			<c:forEach items="${sections}" var="section">
