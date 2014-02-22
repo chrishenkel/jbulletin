@@ -3,6 +3,9 @@
 ##Description
 Implementation of forum using Spring and JPA.
 
+[Example ](http://jbulletin.herokuapp.com/) running on heroku instance: 
+
+
 ## Running the application locally
 
 First build with:
