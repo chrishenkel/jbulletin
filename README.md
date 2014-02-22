@@ -1,6 +1,7 @@
 # JBulletin - Web Application - A forum built in Java using Spring and JPA
 
-This is a medium sized project to create a Java forum using Spring and JPA. 
+##Description
+Implementation of forum using Spring and JPA.
 
 ## Running the application locally
 
